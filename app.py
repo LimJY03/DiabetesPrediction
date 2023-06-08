@@ -37,11 +37,51 @@ def get_user_input() -> list[int]:
 
 # Display result
 def show_result(user_input: list[int]) -> None:
-
     result = model.predict(scaler.transform([user_input]))
 
     st.markdown('## Result')
-    st.write(f'You are **{"UN" if result == 0 else ""}LIKELY** to get diabetes!')
+
+    if result == 0:
+        st.write(f'You are **UNLIKELY** to get diabetes!')
+    else:
+        st.write(f'You are **LIKELY** to get diabetes!')
+        featuresExceededLevel(user_input)
+        show_recommendation(user_input)
+        
+def featuresExceededLevel(user_input):
+    if user_input[1] > 126:
+        st.write('- High glucose concentration')
+
+    if user_input[3] > 20:
+        st.write('- Thick skin')
+
+    if user_input[4] > 230:
+        st.write('- High insulin concentration')
+
+    if user_input[4] < 30:
+        st.write('- Low insulin concentration')
+
+    if user_input[5] > 25:
+        st.write('- Overweight')
+
+def show_recommendation(user_input):
+    st.write('Tips on improving your health\n')
+    if user_input[1] > 126:
+        st.write('- Manage your carbohydrate intake')
+        st.write('- Get enough quality sleep')
+
+    if user_input[3] > 20:
+        st.write('- Increase physical activity')
+
+    if user_input[4] > 230:
+        st.write('- Manage your food portions')
+
+    if user_input[4] < 30:
+        st.write('- Have foods that boost natural insulin')
+
+    if user_input[5] > 25:
+        st.write('- Reduce daily calorie intake')
+        st.write('- Reduce your weight')
 
 # UI
 st.title('Diabetes Risk Calculator')
