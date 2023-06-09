@@ -28,12 +28,12 @@ def get_user_input() -> list[int]:
             skin_thickness = st.number_input('Tricep Skin Fold Thickness (mm)', value=20.5, min_value=1.0, max_value=500.0, step=1., format='%.2f')
             height = st.number_input('Your Height (m)', value=150.0, min_value=1.0, max_value=250.0, step=1., format='%.2f')
 
-        diabetes_pidegree_function = st.number_input('diabetes_pidegree_function', 0, 1000)
+        diabetes_pedigree_function = st.number_input('Diabetes Pedigree Function', min_value=0.0, max_value=1000.0, step=1., format='%.2f')
 
         bmi = kg / (height ** 2)
 
     return [pregnancies, glucose, blood_pressure, skin_thickness,
-            insulin, bmi, diabetes_pidegree_function, age]
+            insulin, bmi, diabetes_pedigree_function, age]
 
 # Display result
 def show_result(user_input: list[int]) -> None:
